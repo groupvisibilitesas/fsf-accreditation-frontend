@@ -52,11 +52,15 @@ async function handle(request: NextRequest, context: { params: Promise<{ path: s
     response = await forward(request, path, token);
   }
 
-  const responseBody = await response.text();
-  return new NextResponse(responseBody, {
-    status: response.status,
-    headers: { "Content-Type": response.headers.get("content-type") ?? "application/json" },
-  });
+  // ArrayBuffer (pas `.text()`) : preserve les reponses binaires (exports
+  // PDF/XLSX) que UTF-8 corromprait a l'aller-retour texte.
+  const responseBody = await response.arrayBuffer();
+  const headers: Record<string, string> = {
+    "Content-Type": response.headers.get("content-type") ?? "application/json",
+  };
+  const disposition = response.headers.get("content-disposition");
+  if (disposition) headers["Content-Disposition"] = disposition;
+  return new NextResponse(responseBody, { status: response.status, headers });
 }
 
 export {
