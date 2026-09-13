@@ -80,6 +80,32 @@ export type ScanSource = "ONLINE" | "OFFLINE_SYNCED";
 
 export type ScanAction = "CHECK_IN" | "CHECK_OUT";
 
+export interface InternalUser {
+  id: string;
+  email: string;
+  kind: UserKind;
+  role: StaffRole | null;
+  status: UserStatus;
+  mfaEnabled: boolean;
+  displayName: string | null;
+  lastLoginAt: string | null;
+  failedLoginAttempts: number;
+  lockedUntil: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface LoginAttempt {
+  id: string;
+  email: string;
+  userId: string | null;
+  ipAddress: string | null;
+  userAgent: string | null;
+  succeeded: boolean;
+  reason: string | null;
+  createdAt: string;
+}
+
 export interface AuthenticatedUser {
   id: string;
   email: string;

@@ -90,6 +90,59 @@
   --sidebar-accent-foreground: #f8fafc;
   --sidebar-border: rgba(255, 255, 255, 0.08);
   --sidebar-ring: #10b981;
+  --glass-bg: rgba(15, 23, 42, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: none;
+}
+
+/*
+ * Theme clair "Commission FSF" — reserve au back-office (`/admin`), applique
+ * en scopant la classe `.theme-admin-light` sur la racine du layout admin.
+ * Le reste de l'application (portail public, espace journaliste, scanner)
+ * garde le theme sombre par defaut ci-dessus : ce n'est PAS un remplacement
+ * global, seulement une variante scopee pour la commission.
+ *
+ * Palette calquee sur l'identite visuelle reelle de la FSF (fsfoot.sn) :
+ * vert institutionnel fonce (bandeau/sidebar), or (accent/etats actifs),
+ * rouge (alertes/destructif), fond blanc.
+ */
+.theme-admin-light {
+  color-scheme: light;
+  --background: #ffffff;
+  --foreground: #10241a;
+  --card: #ffffff;
+  --card-foreground: #10241a;
+  --popover: #ffffff;
+  --popover-foreground: #10241a;
+  --primary: #00843d;
+  --primary-foreground: #ffffff;
+  --secondary: #f5c518;
+  --secondary-foreground: #3f2e00;
+  --muted: #f3f4f1;
+  --muted-foreground: #5b6b62;
+  --accent: #e6f4ec;
+  --accent-foreground: #00432a;
+  --destructive: #e2001a;
+  --destructive-foreground: #ffffff;
+  --border: #e5e7e2;
+  --input: #e5e7e2;
+  --ring: #00843d;
+  --chart-1: #00843d;
+  --chart-2: #f5c518;
+  --chart-3: #e2001a;
+  --chart-4: #266d00;
+  --chart-5: #94a3b8;
+  --sidebar: #00432a;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #f5c518;
+  --sidebar-primary-foreground: #2b1f00;
+  --sidebar-accent: rgba(255, 255, 255, 0.1);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.14);
+  --sidebar-ring: #f5c518;
+  --glass-bg: #ffffff;
+  --glass-border: #e5e7e2;
+  --glass-shadow: 0 1px 2px rgba(16, 36, 26, 0.04), 0 8px 24px -12px rgba(16, 36, 26, 0.08);
 }
 
 @layer base {
@@ -142,12 +195,13 @@
   background-size: 200% 200%;
 }
 
-/* ─── Glassmorphism ───────────────────────────────────────────────────── */
+/* ─── Glassmorphism (variantes par --glass-* selon le theme actif) ──────── */
 .glass-panel {
-  background: rgba(15, 23, 42, 0.75);
+  background: var(--glass-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
 }
 
 .glass-card-hover {
@@ -202,6 +256,18 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(16, 185, 129, 0.6);
+}
+
+.theme-admin-light ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.theme-admin-light ::-webkit-scrollbar-thumb {
+  background: rgba(0, 67, 42, 0.18);
+}
+
+.theme-admin-light ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 67, 42, 0.32);
 }
 
 @media print {

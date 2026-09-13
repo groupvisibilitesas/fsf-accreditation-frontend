@@ -1,4 +1,4 @@
-import type { DocumentType, MediaType, RoleInEvent } from "@/lib/types";
+import type { DocumentType, MediaType, RoleInEvent, StaffRole, UserStatus } from "@/lib/types";
 
 export const DOCUMENT_TYPE_LABELS: Record<DocumentType, string> = {
   CARTE_PRESSE: "Carte Nationale de Presse (CNP)",
@@ -27,4 +27,19 @@ export const MEDIA_TYPE_LABELS: Record<MediaType, string> = {
   CREATEUR_CONTENU: "Créateur de contenu",
   MEDIA_INTERNATIONAL: "Média international",
   AUTRE: "Autre",
+};
+
+export const STAFF_ROLE_LABELS: Record<StaffRole, string> = {
+  ADMIN: "Administrateur",
+  RESPONSABLE_ACCREDITATION: "Responsable accréditation",
+  COMMISSION_VALIDATION: "Commission de validation",
+  AGENT_CONTROLE: "Agent de contrôle",
+  SUPERVISEUR: "Superviseur / Reporting",
+};
+
+export const USER_STATUS_LABELS: Record<UserStatus, string> = {
+  PENDING: "En attente",
+  ACTIVE: "Actif",
+  INACTIVE: "Inactif",
+  SUSPENDED: "Suspendu",
 };
