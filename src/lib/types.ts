@@ -115,12 +115,24 @@ export interface Match {
   homeTeam: string;
   awayTeam: string;
   kickoffAt: string;
+  timezone?: string;
   stadium: string;
   city: string;
   status: MatchStatus;
-  capacityTotal: number;
-  requestsOpenAt: string;
-  requestsCloseAt: string;
+  capacityTotal: number | null;
+  pressTribuneCapacity: number | null;
+  requestsOpenAt: string | null;
+  requestsCloseAt: string | null;
+  rulesNotes?: string | null;
+}
+
+export interface MatchQuotaConfig {
+  categoryId: string;
+  category: string;
+  quotaTotal: number;
+  consumed: number;
+  overflowPolicy: OverflowPolicy;
+  zoneIds: string[];
 }
 
 export interface AccreditationCategory {

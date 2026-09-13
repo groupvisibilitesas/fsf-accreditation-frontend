@@ -10,6 +10,8 @@ import {
   ShieldCheck,
   ScrollText,
   IdCard,
+  CalendarRange,
+  MapPinned,
 } from "lucide-react";
 import { useLogout } from "@/hooks/use-session";
 import { cn } from "cn";
@@ -18,6 +20,8 @@ import { Button } from "@/components/ui/button";
 const NAV = [
   { href: "/admin", label: "Tableau de bord", icon: LayoutDashboard },
   { href: "/admin/requests", label: "Demandes", icon: FileStack },
+  { href: "/admin/matches", label: "Matchs & quotas", icon: CalendarRange },
+  { href: "/admin/config", label: "Zones & catégories", icon: MapPinned },
   { href: "/admin/media", label: "Médias", icon: Building2 },
   { href: "/admin/badges", label: "Impression badges", icon: IdCard },
   { href: "/admin/notifications", label: "Notifications", icon: Bell },
