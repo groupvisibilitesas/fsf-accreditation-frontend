@@ -8,6 +8,7 @@ import { LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { BrandMark } from "@/components/layout/brand-mark";
 import { useQueryClient } from "@tanstack/react-query";
 import { SESSION_QUERY_KEY } from "@/hooks/use-session";
 import type { AuthenticatedUser } from "@/lib/types";
@@ -64,55 +65,57 @@ function LoginForm() {
   return (
     <div className="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-4 py-16 sm:px-6">
       <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="glass-panel rounded-2xl p-8"
+        initial={{ opacity: 0, y: 12, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        className="glass-panel overflow-hidden rounded-3xl shadow-xl"
       >
-        <div className="text-center">
-          <span className="text-3xl" aria-hidden>
-            🦁
-          </span>
-          <h1 className="mt-3 font-display text-2xl font-semibold">Connexion</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Compte demandeur, rédacteur en chef ou Commission FSF.
+        <div className="senegal-stripe h-1" />
+        <div className="p-8">
+          <div className="text-center">
+            <BrandMark size="lg" className="mx-auto" />
+            <h1 className="mt-3 font-display text-2xl font-semibold">Connexion</h1>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Compte demandeur, rédacteur en chef ou Commission FSF.
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+            <div className="space-y-1.5">
+              <Label htmlFor="email">Adresse email</Label>
+              <Input
+                id="email"
+                type="email"
+                autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="password">Mot de passe</Label>
+              <Input
+                id="password"
+                type="password"
+                autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            {error && <p className="text-sm text-destructive">{error}</p>}
+            <Button type="submit" className="w-full" disabled={loading}>
+              <LogIn /> {loading ? "Connexion..." : "Se connecter"}
+            </Button>
+          </form>
+
+          <p className="mt-6 text-center text-sm text-muted-foreground">
+            Pas encore de compte ?{" "}
+            <Link href="/register" className="font-medium text-primary hover:underline">
+              Créer un compte demandeur
+            </Link>
           </p>
         </div>
-
-        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-          <div className="space-y-1.5">
-            <Label htmlFor="email">Adresse email</Label>
-            <Input
-              id="email"
-              type="email"
-              autoComplete="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="space-y-1.5">
-            <Label htmlFor="password">Mot de passe</Label>
-            <Input
-              id="password"
-              type="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          {error && <p className="text-sm text-destructive">{error}</p>}
-          <Button type="submit" className="w-full" disabled={loading}>
-            <LogIn /> {loading ? "Connexion..." : "Se connecter"}
-          </Button>
-        </form>
-
-        <p className="mt-6 text-center text-sm text-muted-foreground">
-          Pas encore de compte ?{" "}
-          <Link href="/register" className="font-medium text-primary hover:underline">
-            Créer un compte demandeur
-          </Link>
-        </p>
       </motion.div>
     </div>
   );

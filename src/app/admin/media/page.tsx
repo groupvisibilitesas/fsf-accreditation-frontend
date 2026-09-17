@@ -33,7 +33,7 @@ const BROADCASTER_TIERS: BroadcasterTier[] = [
 ];
 
 const STATUS_TONE: Record<MediaStatus, string> = {
-  PENDING: "bg-secondary/15 text-secondary",
+  PENDING: "bg-warning/15 text-warning",
   VALIDATED: "bg-primary/15 text-primary",
   REJECTED: "bg-destructive/15 text-destructive",
   SUSPENDED: "bg-destructive/15 text-destructive",

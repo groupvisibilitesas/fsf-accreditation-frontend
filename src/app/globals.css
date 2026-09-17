@@ -2,8 +2,6 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -31,6 +29,8 @@
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning: var(--warning);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
@@ -49,64 +49,13 @@
 }
 
 /*
- * Theme unique et sombre (pas de mode clair) : palette "ardoise" +
- * accents Senegal (emeraude / ambre / rouge) — cf. prototype de reference
- * fsf_google_ai-main/src/index.css. Les memes valeurs sont dupliquees sur
- * :root et .dark pour que les composants shadcn qui testent la classe
- * .dark (via tw-animate-css, etc.) restent coherents.
- */
-:root,
-.dark {
-  --background: #020617;
-  --foreground: #f8fafc;
-  --card: #0f172a;
-  --card-foreground: #f8fafc;
-  --popover: #0f172a;
-  --popover-foreground: #f8fafc;
-  --primary: #10b981;
-  --primary-foreground: #022c22;
-  --secondary: #f59e0b;
-  --secondary-foreground: #451a03;
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
-  --accent: #1e293b;
-  --accent-foreground: #f8fafc;
-  --destructive: #dc2626;
-  --destructive-foreground: #fef2f2;
-  --border: rgba(255, 255, 255, 0.08);
-  --input: rgba(255, 255, 255, 0.1);
-  --ring: #10b981;
-  --chart-1: #10b981;
-  --chart-2: #f59e0b;
-  --chart-3: #dc2626;
-  --chart-4: #34d399;
-  --chart-5: #fbbf24;
-  --radius: 0.75rem;
-  --sidebar: #0b1220;
-  --sidebar-foreground: #f8fafc;
-  --sidebar-primary: #10b981;
-  --sidebar-primary-foreground: #022c22;
-  --sidebar-accent: #1e293b;
-  --sidebar-accent-foreground: #f8fafc;
-  --sidebar-border: rgba(255, 255, 255, 0.08);
-  --sidebar-ring: #10b981;
-  --glass-bg: rgba(15, 23, 42, 0.75);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-shadow: none;
-}
-
-/*
- * Theme clair "Commission FSF" — reserve au back-office (`/admin`), applique
- * en scopant la classe `.theme-admin-light` sur la racine du layout admin.
- * Le reste de l'application (portail public, espace journaliste, scanner)
- * garde le theme sombre par defaut ci-dessus : ce n'est PAS un remplacement
- * global, seulement une variante scopee pour la commission.
- *
- * Palette calquee sur l'identite visuelle reelle de la FSF (fsfoot.sn) :
+ * Theme unique et clair — identite visuelle reelle de la FSF (fsfoot.sn) :
  * vert institutionnel fonce (bandeau/sidebar), or (accent/etats actifs),
- * rouge (alertes/destructif), fond blanc.
+ * rouge (alertes/destructif), fond blanc. Applique globalement (plus de
+ * mode sombre, ni de variante scopee a l'admin) : une seule palette pour
+ * tout le portail (public, espace journaliste, scanner, back-office).
  */
-.theme-admin-light {
+:root {
   color-scheme: light;
   --background: #ffffff;
   --foreground: #10241a;
@@ -118,6 +67,8 @@
   --primary-foreground: #ffffff;
   --secondary: #f5c518;
   --secondary-foreground: #3f2e00;
+  --warning: #b45309;
+  --warning-foreground: #451a03;
   --muted: #f3f4f1;
   --muted-foreground: #5b6b62;
   --accent: #e6f4ec;
@@ -132,6 +83,7 @@
   --chart-3: #e2001a;
   --chart-4: #266d00;
   --chart-5: #94a3b8;
+  --radius: 0.75rem;
   --sidebar: #00432a;
   --sidebar-foreground: #ffffff;
   --sidebar-primary: #f5c518;
@@ -154,7 +106,7 @@
   }
   html {
     @apply font-sans;
-    color-scheme: dark;
+    color-scheme: light;
   }
   h1,
   h2,
@@ -195,7 +147,7 @@
   background-size: 200% 200%;
 }
 
-/* ─── Glassmorphism (variantes par --glass-* selon le theme actif) ──────── */
+/* ─── Cartes (fond blanc opaque + ombre douce) ──────────────────────────── */
 .glass-panel {
   background: var(--glass-bg);
   backdrop-filter: blur(16px);
@@ -204,14 +156,24 @@
   box-shadow: var(--glass-shadow);
 }
 
+/* Barre collante translucide (header/shell) — le flou y a un rendu visible,
+ * contrairement a .glass-panel qui est desormais un fond opaque. */
+.glass-header {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 2px rgba(16, 36, 26, 0.04);
+}
+
 .glass-card-hover {
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card-hover:hover {
   transform: translateY(-2px);
-  border-color: rgba(16, 185, 129, 0.3);
-  box-shadow: 0 12px 30px -10px rgba(16, 185, 129, 0.15);
+  border-color: rgba(0, 132, 61, 0.3);
+  box-shadow: 0 16px 32px -12px rgba(0, 132, 61, 0.18);
 }
 
 /* ─── Liseré tricolore Senegal ────────────────────────────────────────── */
@@ -246,27 +208,15 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.6);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(51, 65, 85, 0.6);
+  background: rgba(0, 67, 42, 0.18);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(16, 185, 129, 0.6);
-}
-
-.theme-admin-light ::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.theme-admin-light ::-webkit-scrollbar-thumb {
-  background: rgba(0, 67, 42, 0.18);
-}
-
-.theme-admin-light ::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 67, 42, 0.32);
 }
 
@@ -280,5 +230,42 @@
   }
   .print-only {
     display: block !important;
+  }
+}
+
+/* ─── Isolation d'impression : n'imprime que l'élément ciblé (badge de
+ * presse), quel que soit l'habillage de la page (en-tête, sidebar admin,
+ * panneau de détail...). Activée en ajoutant `print-isolate-active` sur
+ * <body> juste avant `window.print()` (cf. holographic-badge.tsx). ────── */
+@media print {
+  body.print-isolate-active * {
+    visibility: hidden !important;
+  }
+  body.print-isolate-active .print-isolate-root,
+  body.print-isolate-active .print-isolate-root * {
+    visibility: visible !important;
+  }
+  body.print-isolate-active .print-isolate-root {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+  }
+}
+
+/* Format carte de presse A6 (105×148mm), une face par page imprimée. */
+@page fsf-badge-a6 {
+  size: 105mm 148mm;
+  margin: 0;
+}
+
+@media print {
+  .badge-face {
+    page: fsf-badge-a6;
+    width: 105mm;
+    height: 148mm;
+    overflow: hidden;
+  }
+  .badge-face + .badge-face {
+    break-before: page;
   }
 }

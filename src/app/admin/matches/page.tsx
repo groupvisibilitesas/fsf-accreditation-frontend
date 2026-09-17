@@ -27,7 +27,7 @@ import type { Competition, Match, PaginatedResult } from "@/lib/types";
 const STATUS_TONE: Record<string, string> = {
   DRAFT: "bg-muted text-muted-foreground",
   OPEN: "bg-primary/15 text-primary",
-  CLOSED: "bg-secondary/15 text-secondary",
+  CLOSED: "bg-warning/15 text-warning",
   PLAYED: "bg-muted text-muted-foreground",
   CANCELLED: "bg-destructive/15 text-destructive",
   ARCHIVED: "bg-muted text-muted-foreground",

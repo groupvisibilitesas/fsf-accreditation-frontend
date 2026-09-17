@@ -24,12 +24,12 @@ const RESULT_CONFIG: Record<
   REVOKED: { label: "BADGE RÉVOQUÉ", tone: "bg-destructive/15 text-destructive border-destructive/40", icon: ShieldX },
   ALREADY_USED: {
     label: "DÉJÀ UTILISÉ",
-    tone: "bg-secondary/15 text-secondary border-secondary/40",
+    tone: "bg-warning/15 text-warning border-warning/40",
     icon: AlertTriangle,
   },
   OUT_OF_SCOPE: {
     label: "ZONE NON AUTORISÉE",
-    tone: "bg-secondary/15 text-secondary border-secondary/40",
+    tone: "bg-warning/15 text-warning border-warning/40",
     icon: AlertTriangle,
   },
 };

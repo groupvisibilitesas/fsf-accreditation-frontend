@@ -33,12 +33,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="fr"
-      className={`dark ${jakarta.variable} ${outfit.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${jakarta.variable} ${outfit.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <AppProviders>
           <TooltipProvider>{children}</TooltipProvider>
-          <Toaster richColors theme="dark" position="top-right" />
+          <Toaster richColors theme="light" position="top-right" />
         </AppProviders>
       </body>
     </html>

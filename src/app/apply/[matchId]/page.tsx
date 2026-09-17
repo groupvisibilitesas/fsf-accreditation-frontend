@@ -4,6 +4,7 @@ import { backendFetch } from "@/lib/backend-client";
 import { getAccessToken } from "@/lib/session";
 import { publicServerApi } from "@/lib/server-api";
 import { AccreditationWizard } from "@/components/apply/accreditation-wizard";
+import { BrandMark } from "@/components/layout/brand-mark";
 import type { Match, MediaSummary, RequesterProfile } from "@/lib/types";
 
 export default async function ApplyPage({ params }: { params: Promise<{ matchId: string }> }) {
@@ -31,12 +32,10 @@ export default async function ApplyPage({ params }: { params: Promise<{ matchId:
   return (
     <div className="min-h-screen">
       <div className="senegal-stripe h-1" />
-      <header className="glass-panel border-x-0 border-t-0">
+      <header className="glass-header sticky top-0 z-50">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
           <Link href="/" className="flex items-center gap-2 font-display text-lg font-semibold">
-            <span className="text-2xl" aria-hidden>
-              🦁
-            </span>
+            <BrandMark />
             Accréditation FSF
           </Link>
           <p className="hidden text-sm text-muted-foreground sm:block">
@@ -47,7 +46,7 @@ export default async function ApplyPage({ params }: { params: Promise<{ matchId:
 
       <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         {!acceptingRequests ? (
-          <div className="glass-panel mx-auto max-w-lg rounded-2xl p-8 text-center">
+          <div className="glass-panel mx-auto max-w-lg rounded-3xl p-8 text-center shadow-xl">
             <p className="font-display text-xl font-semibold">Demandes closes</p>
             <p className="mt-2 text-sm text-muted-foreground">
               Ce match n&apos;accepte plus de nouvelles demandes d&apos;accréditation pour le

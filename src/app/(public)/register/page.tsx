@@ -11,6 +11,7 @@ import { UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { BrandMark } from "@/components/layout/brand-mark";
 import {
   Select,
   SelectContent,
@@ -78,96 +79,101 @@ export default function RegisterPage() {
 
   return (
     <div className="mx-auto max-w-xl px-4 py-16 sm:px-6">
-      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
+      <motion.div
+        initial={{ opacity: 0, y: 12, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+      >
         <div className="text-center">
-          <span className="text-3xl" aria-hidden>
-            🦁
-          </span>
+          <BrandMark size="lg" className="mx-auto" />
           <h1 className="mt-3 font-display text-2xl font-semibold">Créer mon compte demandeur</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Une seule inscription pour toutes vos demandes d&apos;accréditation FSF.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="glass-panel mt-6 space-y-4 rounded-2xl p-6">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="space-y-1.5">
-              <Label htmlFor="firstName">Prénom</Label>
-              <Input id="firstName" {...register("firstName")} />
-              {errors.firstName && <p className="text-xs text-destructive">{errors.firstName.message}</p>}
+        <div className="glass-panel mt-6 overflow-hidden rounded-3xl shadow-xl">
+          <div className="senegal-stripe h-1" />
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-6">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="space-y-1.5">
+                <Label htmlFor="firstName">Prénom</Label>
+                <Input id="firstName" {...register("firstName")} />
+                {errors.firstName && <p className="text-xs text-destructive">{errors.firstName.message}</p>}
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="lastName">Nom</Label>
+                <Input id="lastName" {...register("lastName")} />
+                {errors.lastName && <p className="text-xs text-destructive">{errors.lastName.message}</p>}
+              </div>
             </div>
+
             <div className="space-y-1.5">
-              <Label htmlFor="lastName">Nom</Label>
-              <Input id="lastName" {...register("lastName")} />
-              {errors.lastName && <p className="text-xs text-destructive">{errors.lastName.message}</p>}
+              <Label htmlFor="email">Adresse email</Label>
+              <Input id="email" type="email" {...register("email")} />
+              {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
             </div>
-          </div>
 
-          <div className="space-y-1.5">
-            <Label htmlFor="email">Adresse email</Label>
-            <Input id="email" type="email" {...register("email")} />
-            {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
-          </div>
-
-          <div className="space-y-1.5">
-            <Label htmlFor="password">Mot de passe</Label>
-            <Input id="password" type="password" {...register("password")} />
-            {errors.password && <p className="text-xs text-destructive">{errors.password.message}</p>}
-          </div>
-
-          <div className="space-y-1.5">
-            <Label htmlFor="mediaId">Organe de presse</Label>
-            <Controller
-              control={control}
-              name="mediaId"
-              render={({ field }) => (
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger id="mediaId" className="w-full">
-                    <SelectValue placeholder="Sélectionnez votre média" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {mediaList.map((media) => (
-                      <SelectItem key={media.id} value={media.id}>
-                        {media.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              )}
-            />
-            {errors.mediaId && <p className="text-xs text-destructive">{errors.mediaId.message}</p>}
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-1.5">
-              <Label htmlFor="phone">Téléphone</Label>
-              <Input id="phone" {...register("phone")} />
-              {errors.phone && <p className="text-xs text-destructive">{errors.phone.message}</p>}
+              <Label htmlFor="password">Mot de passe</Label>
+              <Input id="password" type="password" {...register("password")} />
+              {errors.password && <p className="text-xs text-destructive">{errors.password.message}</p>}
             </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="function">Fonction</Label>
-              <Input id="function" placeholder="Journaliste, photographe..." {...register("function")} />
-              {errors.function && <p className="text-xs text-destructive">{errors.function.message}</p>}
-            </div>
-          </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-1.5">
-              <Label htmlFor="pressCardNumber">N° Carte de presse (CNP)</Label>
-              <Input id="pressCardNumber" {...register("pressCardNumber")} />
+              <Label htmlFor="mediaId">Organe de presse</Label>
+              <Controller
+                control={control}
+                name="mediaId"
+                render={({ field }) => (
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <SelectTrigger id="mediaId" className="w-full">
+                      <SelectValue placeholder="Sélectionnez votre média" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {mediaList.map((media) => (
+                        <SelectItem key={media.id} value={media.id}>
+                          {media.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+              {errors.mediaId && <p className="text-xs text-destructive">{errors.mediaId.message}</p>}
             </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="specialty">Spécialité</Label>
-              <Input id="specialty" placeholder="Sport, politique..." {...register("specialty")} />
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="space-y-1.5">
+                <Label htmlFor="phone">Téléphone</Label>
+                <Input id="phone" {...register("phone")} />
+                {errors.phone && <p className="text-xs text-destructive">{errors.phone.message}</p>}
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="function">Fonction</Label>
+                <Input id="function" placeholder="Journaliste, photographe..." {...register("function")} />
+                {errors.function && <p className="text-xs text-destructive">{errors.function.message}</p>}
+              </div>
             </div>
-          </div>
 
-          {serverError && <p className="text-sm text-destructive">{serverError}</p>}
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="space-y-1.5">
+                <Label htmlFor="pressCardNumber">N° Carte de presse (CNP)</Label>
+                <Input id="pressCardNumber" {...register("pressCardNumber")} />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="specialty">Spécialité</Label>
+                <Input id="specialty" placeholder="Sport, politique..." {...register("specialty")} />
+              </div>
+            </div>
 
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
-            <UserPlus /> {isSubmitting ? "Création..." : "Créer mon compte"}
-          </Button>
-        </form>
+            {serverError && <p className="text-sm text-destructive">{serverError}</p>}
+
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              <UserPlus /> {isSubmitting ? "Création..." : "Créer mon compte"}
+            </Button>
+          </form>
+        </div>
 
         <p className="mt-6 text-center text-sm text-muted-foreground">
           Déjà accrédité ?{" "}

@@ -52,6 +52,16 @@ export default function AdminBadgesPage() {
     enabled: !!requests && requests.items.length > 0,
   });
 
+  function handlePrint() {
+    document.body.classList.add("print-isolate-active");
+    const cleanup = () => {
+      document.body.classList.remove("print-isolate-active");
+      window.removeEventListener("afterprint", cleanup);
+    };
+    window.addEventListener("afterprint", cleanup);
+    window.print();
+  }
+
   return (
     <div>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3 no-print">
@@ -74,7 +84,7 @@ export default function AdminBadgesPage() {
               ))}
             </SelectContent>
           </Select>
-          <Button onClick={() => window.print()} disabled={!badgeData?.length}>
+          <Button onClick={handlePrint} disabled={!badgeData?.length}>
             <Printer /> Imprimer ({badgeData?.length ?? 0})
           </Button>
         </div>
@@ -86,7 +96,7 @@ export default function AdminBadgesPage() {
         <p className="text-sm text-muted-foreground">Aucun badge généré pour ce match.</p>
       )}
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 print:grid-cols-3">
+      <div className="print-isolate-root grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 print:grid-cols-3">
         {badgeData?.map(({ request, accreditation, qrUrl }) => (
           <PrintBadgeCard key={request.id} request={request} accreditation={accreditation} qrUrl={qrUrl} />
         ))}

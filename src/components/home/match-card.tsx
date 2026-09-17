@@ -20,7 +20,7 @@ export function MatchCard({ match, quotas }: { match: Match; quotas: MatchQuota[
   const fillRate = totalQuota > 0 ? Math.round((totalConsumed / totalQuota) * 100) : 0;
 
   return (
-    <div className="glass-panel glass-card-hover flex flex-col rounded-2xl p-5">
+    <div className="glass-panel glass-card-hover flex flex-col rounded-3xl p-5">
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="font-display text-lg font-semibold">

@@ -32,10 +32,10 @@ export function Hero({ featuredMatch }: { featuredMatch: Match | null }) {
   return (
     <section className="relative overflow-hidden">
       <div
-        className="pointer-events-none absolute inset-0 opacity-40"
+        className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(600px circle at 20% 0%, rgba(16,185,129,0.18), transparent 60%), radial-gradient(500px circle at 90% 20%, rgba(245,158,11,0.14), transparent 55%)",
+            "radial-gradient(600px circle at 20% 0%, rgba(0,132,61,0.35), transparent 60%), radial-gradient(500px circle at 90% 20%, rgba(245,197,24,0.28), transparent 55%), radial-gradient(450px circle at 10% 100%, rgba(226,0,26,0.18), transparent 55%)",
         }}
       />
       <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center md:py-24">
@@ -79,7 +79,7 @@ export function Hero({ featuredMatch }: { featuredMatch: Match | null }) {
             ref={cardRef}
             onMouseMove={handleMouseMove}
             onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-            className="glass-panel glass-card-hover transform-style-3d relative overflow-hidden rounded-3xl p-6 transition-transform duration-200 ease-out"
+            className="glass-panel glass-card-hover transform-style-3d relative overflow-hidden rounded-3xl p-6 shadow-xl transition-transform duration-200 ease-out"
             style={{ transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }}
           >
             <div className="hologram-shimmer absolute inset-0 -z-10 animate-pulse opacity-30" />

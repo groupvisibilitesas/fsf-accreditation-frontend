@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -17,6 +17,7 @@ import {
   Menu,
   X,
   LogOut,
+  FileDown,
 } from "lucide-react";
 import { useLogout, useSession } from "@/hooks/use-session";
 import { cn } from "cn";
@@ -30,6 +31,12 @@ const NAV = [
   { href: "/admin/media", label: "Médias", icon: Building2 },
   { href: "/admin/badges", label: "Impression badges", icon: IdCard },
   { href: "/admin/notifications", label: "Notifications", icon: Bell },
+  {
+    href: "/admin/exports",
+    label: "Exports & rapports",
+    icon: FileDown,
+    permission: "export:data",
+  },
   {
     href: "/admin/users",
     label: "Utilisateurs",
@@ -55,19 +62,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const items = NAV.filter((item) => !item.permission || user?.permissions?.includes(item.permission));
 
-  // Les menus/dialogues/select (Radix) sont portes vers `document.body`,
-  // hors de l'arbre DOM de ce layout : sans ceci, les variables CSS du theme
-  // clair scope a `.theme-admin-light` ne s'appliqueraient qu'a la sidebar et
-  // au contenu, laissant les popovers/menus dans le theme sombre global.
-  useEffect(() => {
-    document.body.classList.add("theme-admin-light");
-    return () => {
-      document.body.classList.remove("theme-admin-light");
-    };
-  }, []);
-
   return (
-    <div className="theme-admin-light min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Backdrop mobile */}
       {mobileOpen && (
         <div

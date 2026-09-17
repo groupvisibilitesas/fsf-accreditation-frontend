@@ -4,11 +4,11 @@ import { cn } from "cn";
 
 const CONFIG: Record<RequestStatus, { label: string; className: string }> = {
   DRAFT: { label: "Brouillon", className: "bg-muted text-muted-foreground" },
-  SUBMITTED: { label: "Soumise", className: "bg-secondary/15 text-secondary" },
-  UNDER_REVIEW: { label: "En examen", className: "bg-secondary/15 text-secondary" },
+  SUBMITTED: { label: "Soumise", className: "bg-warning/15 text-warning" },
+  UNDER_REVIEW: { label: "En examen", className: "bg-warning/15 text-warning" },
   INFO_REQUESTED: { label: "Complément demandé", className: "bg-destructive/15 text-destructive" },
-  COMPLETE: { label: "Complète", className: "bg-secondary/15 text-secondary" },
-  PENDING_VALIDATION: { label: "En attente de validation", className: "bg-secondary/15 text-secondary" },
+  COMPLETE: { label: "Complète", className: "bg-warning/15 text-warning" },
+  PENDING_VALIDATION: { label: "En attente de validation", className: "bg-warning/15 text-warning" },
   VALIDATED: { label: "Validée", className: "bg-primary/15 text-primary" },
   REJECTED: { label: "Refusée", className: "bg-destructive/15 text-destructive" },
   CANCELLED: { label: "Annulée", className: "bg-muted text-muted-foreground" },
@@ -22,7 +22,7 @@ export function StatusBadge({ status }: { status: RequestStatus }) {
 }
 
 const REQUESTER_STATUS_CONFIG: Record<RequesterStatus, { label: string; className: string }> = {
-  PENDING: { label: "En attente", className: "bg-secondary/15 text-secondary" },
+  PENDING: { label: "En attente", className: "bg-warning/15 text-warning" },
   VALIDATED: { label: "Validé", className: "bg-primary/15 text-primary" },
   REJECTED: { label: "Rejeté", className: "bg-destructive/15 text-destructive" },
   SUSPENDED: { label: "Suspendu", className: "bg-destructive/15 text-destructive" },

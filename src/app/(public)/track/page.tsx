@@ -72,7 +72,7 @@ export default function TrackPage() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="glass-panel mt-8 space-y-4 rounded-2xl p-6">
+      <form onSubmit={handleSubmit} className="glass-panel mt-8 space-y-4 rounded-3xl p-6 shadow-xl">
         <div className="space-y-1.5">
           <Label htmlFor="reference">Numéro de dossier</Label>
           <Input
@@ -106,12 +106,14 @@ export default function TrackPage() {
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            className="glass-panel mt-6 rounded-2xl p-6"
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="glass-panel mt-6 rounded-3xl p-6 shadow-xl"
           >
             <div className="flex items-center gap-3">
               {status.tone === "ok" && <CheckCircle2 className="size-8 text-primary" />}
               {status.tone === "ko" && <XCircle className="size-8 text-destructive" />}
-              {status.tone === "pending" && <Clock className="size-8 text-secondary" />}
+              {status.tone === "pending" && <Clock className="size-8 text-warning" />}
               <div>
                 <p className="font-mono text-xs text-muted-foreground">{result.uniqueReference}</p>
                 <p className="font-display text-lg font-semibold">{status.label}</p>
